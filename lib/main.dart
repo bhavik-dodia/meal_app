@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:meals_app/screens/meal_details_page.dart';
 
 import 'screens/home_page.dart';
 
@@ -29,6 +30,10 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomePage(),
+      routes: {MealDetailsPage.routeName: (context) => MealDetailsPage()},
+      onUnknownRoute: (settings) => MaterialPageRoute(
+        builder: (context) => HomePage(),
+      ),
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:meals_app/models/dummy_data.dart';
+import 'package:meals_app/data/dummy_data.dart';
 import 'package:meals_app/screens/category_meals_page.dart';
 import 'package:meals_app/widgets/category_item.dart';
 
@@ -27,7 +27,10 @@ class CategoriesPage extends StatelessWidget {
               closedShape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15.0),
               ),
-              openBuilder: (contex, closeContainer) => CategoryMealsPage(),
+              openBuilder: (contex, closeContainer) => CategoryMealsPage(
+                id: catData.id,
+                title: catData.title,
+              ),
               closedBuilder: (contex, openContainer) => CategoryItem(
                 title: catData.title,
                 color: catData.color,
