@@ -1,23 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/data/dummy_data.dart';
-import 'package:meals_app/widgets/meal_item.dart';
+import 'package:meals_app/models/filters.dart';
+import 'package:provider/provider.dart';
 
-class CategoryMealsPage extends StatelessWidget {
+import '../widgets/meal_item.dart';
+
+class CategoryMealsPage extends StatefulWidget {
   final String id, title;
+  final Function closeContainer;
 
-  const CategoryMealsPage({Key key, this.id, this.title}) : super(key: key);
+  const CategoryMealsPage({Key key, this.id, this.title, this.closeContainer})
+      : super(key: key);
 
   @override
+  _CategoryMealsPageState createState() => _CategoryMealsPageState();
+}
+
+class _CategoryMealsPageState extends State<CategoryMealsPage> {
+  @override
   Widget build(BuildContext context) {
-    final meals =
-        DUMMY_MEALS.where((meal) => meal.categories.contains(id)).toList();
+    final theme = Theme.of(context);
+    final meals = Provider.of<FilteredMeal>(context)
+        .filteredMeals
+        .where((meal) => meal.categories.contains(widget.id))
+        .toList();
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          title,
-          style: TextStyle(fontSize: 25.0),
-        ),
+        elevation: 0.0,
+        backgroundColor: theme.canvasColor,
+        iconTheme: IconThemeData(color: theme.accentColor),
         centerTitle: true,
+        title: Text(
+          widget.title,
+          style: TextStyle(fontSize: 25.0, color: theme.accentColor),
+        ),
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(15.0),

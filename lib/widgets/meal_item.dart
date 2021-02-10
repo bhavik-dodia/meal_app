@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/models/meal.dart';
-import 'package:meals_app/screens/meal_details_page.dart';
+
+import '../models/meal.dart';
+import '../screens/meal_details_page.dart';
 
 class MealItem extends StatelessWidget {
   final Meal meal;
@@ -49,6 +50,8 @@ class MealItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isLight = theme.brightness == Brightness.light;
     return Card(
       elevation: 8.0,
       clipBehavior: Clip.antiAlias,
@@ -69,19 +72,32 @@ class MealItem extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                Positioned(
-                  bottom: 18.0,
-                  right: 0.0,
+                AspectRatio(
+                  aspectRatio: 16 / 9,
                   child: Container(
-                    color: Colors.grey,
+                    alignment: Alignment.bottomRight,
+                    padding: const EdgeInsets.all(15.0),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.transparent,
+                          isLight ? Colors.white : theme.canvasColor,
+                        ],
+                        stops: [0, 1],
+                      ),
+                    ),
                     child: Text(
                       meal.title,
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: isLight ? Colors.black : Colors.white,
                         fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
                       ),
-                      softWrap: true,
+                      textAlign: TextAlign.right,
                       overflow: TextOverflow.fade,
+                      softWrap: true,
                     ),
                   ),
                 ),
@@ -97,10 +113,7 @@ class MealItem extends StatelessWidget {
                     children: [
                       const Icon(Icons.timer_rounded),
                       const SizedBox(width: 5.0),
-                      Text(
-                        '${meal.duration} min',
-                        overflow: TextOverflow.fade,
-                      ),
+                      Text('${meal.duration} min', overflow: TextOverflow.fade),
                     ],
                   ),
                   Row(
@@ -108,10 +121,7 @@ class MealItem extends StatelessWidget {
                     children: [
                       const Icon(Icons.work_outline_rounded),
                       const SizedBox(width: 5.0),
-                      Text(
-                        complexityText,
-                        overflow: TextOverflow.fade,
-                      ),
+                      Text(complexityText, overflow: TextOverflow.fade),
                     ],
                   ),
                   Row(
@@ -119,10 +129,7 @@ class MealItem extends StatelessWidget {
                     children: [
                       const Icon(Icons.attach_money_rounded),
                       const SizedBox(width: 5.0),
-                      Text(
-                        affordabilityText,
-                        overflow: TextOverflow.fade,
-                      ),
+                      Text(affordabilityText, overflow: TextOverflow.fade),
                     ],
                   ),
                 ],

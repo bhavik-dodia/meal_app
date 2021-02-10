@@ -1,21 +1,29 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:meals_app/models/meal.dart';
+
+import '../models/meal.dart';
 
 class MealDetailsPage extends StatelessWidget {
   static const routeName = '/meal-details';
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final meal = ModalRoute.of(context).settings.arguments as Meal;
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: theme.canvasColor,
+        iconTheme: IconThemeData(color: theme.accentColor),
+        centerTitle: true,
         title: Text(
           meal.title,
-          style: TextStyle(fontSize: 25.0),
+          style: TextStyle(
+            fontSize: 25.0,
+            color: theme.accentColor,
+          ),
         ),
-        centerTitle: true,
       ),
       body: MediaQuery.of(context).orientation == Orientation.portrait
           ? Column(
@@ -93,7 +101,7 @@ class MealDetailsPage extends StatelessWidget {
       margin: const EdgeInsets.all(10.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15.0),
-        border: Border.all(color: Colors.deepPurple),
+        border: Border.all(color: Colors.blueAccent),
       ),
       child: child,
     );

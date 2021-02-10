@@ -1,14 +1,15 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:meals_app/data/dummy_data.dart';
-import 'package:meals_app/screens/category_meals_page.dart';
-import 'package:meals_app/widgets/category_item.dart';
+
+import '../data/dummy_data.dart';
+import '../widgets/category_item.dart';
+import 'category_meals_page.dart';
 
 class CategoriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(10.0),
       shrinkWrap: true,
       physics: const BouncingScrollPhysics(),
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -30,6 +31,7 @@ class CategoriesPage extends StatelessWidget {
               openBuilder: (contex, closeContainer) => CategoryMealsPage(
                 id: catData.id,
                 title: catData.title,
+                closeContainer: closeContainer,
               ),
               closedBuilder: (contex, openContainer) => CategoryItem(
                 title: catData.title,
