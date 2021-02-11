@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:meals_app/models/filters.dart';
 import 'package:provider/provider.dart';
+
+import '../models/filters.dart';
 
 class FiltersChips extends StatefulWidget {
   @override

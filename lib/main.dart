@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:meals_app/models/filters.dart';
 import 'package:provider/provider.dart';
 
+import 'models/filters.dart';
 import 'screens/home_page.dart';
 import 'screens/meal_details_page.dart';
 
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context)=> FilteredMeal(),
+      create: (context) => FilteredMeal(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Meals',

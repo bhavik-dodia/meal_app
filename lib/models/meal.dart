@@ -7,8 +7,9 @@ class Meal {
   final Complexity complexity;
   final Affordability affordability;
   final bool isGlutenFree, isLactoseFree, isVegan, isVegetarian;
+  bool isFavorite;
 
-  const Meal({
+  Meal({
     @required this.id,
     @required this.duration,
     @required this.categories,
@@ -22,7 +23,10 @@ class Meal {
     @required this.isLactoseFree,
     @required this.isVegan,
     @required this.isVegetarian,
+    this.isFavorite: false,
   });
+
+  void toggleFavorite() => isFavorite = !isFavorite;
 }
 
 enum Complexity {

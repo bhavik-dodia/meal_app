@@ -42,11 +42,17 @@ class MealDetailsPage extends StatelessWidget {
   }
 
   Widget buildImage(double aspectRatio, String imgUrl) {
-    return AspectRatio(
-      aspectRatio: aspectRatio,
-      child: Image.network(
-        imgUrl,
-        fit: BoxFit.cover,
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      elevation: 8.0,
+      margin: const EdgeInsets.all(8.0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+      child: AspectRatio(
+        aspectRatio: aspectRatio,
+        child: Image.network(
+          imgUrl,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
@@ -94,22 +100,27 @@ class MealDetailsPage extends StatelessWidget {
   }
 
   Widget buildContainer(Widget child) {
-    return Container(
-      height: 150.0,
+    return Card(
       clipBehavior: Clip.antiAlias,
-      width: double.infinity,
-      margin: const EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15.0),
-        border: Border.all(color: Colors.blueAccent),
+      elevation: 8.0,
+      margin: const EdgeInsets.all(8.0),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0)),
+      child: Container(
+        height: 150.0,
+        clipBehavior: Clip.antiAlias,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15.0),
+          border: Border.all(color: Colors.blueAccent),
+        ),
+        child: child,
       ),
-      child: child,
     );
   }
 
   Widget buildSectionTitle(BuildContext context, String text) {
     return Container(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(10.0),
       width: double.infinity,
       child: Text(
         text,

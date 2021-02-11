@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../models/filters.dart';
 import '../models/meal.dart';
 import '../screens/meal_details_page.dart';
 
@@ -49,7 +51,7 @@ class MealItem extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  build(BuildContext context) {
     final theme = Theme.of(context);
     final isLight = theme.brightness == Brightness.light;
     return Card(
@@ -67,9 +69,20 @@ class MealItem extends StatelessWidget {
               children: [
                 AspectRatio(
                   aspectRatio: 16 / 9,
-                  child: Image.network(
-                    meal.imageUrl,
-                    fit: BoxFit.cover,
+                  child: Card(
+                    elevation: 0.0,
+                    margin: EdgeInsets.zero,
+                    clipBehavior: Clip.antiAlias,
+                    color: Colors.transparent,
+                    shape: BeveledRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(60.0),
+                      ),
+                    ),
+                    child: Image.network(
+                      meal.imageUrl,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 AspectRatio(
@@ -99,6 +112,23 @@ class MealItem extends StatelessWidget {
                       overflow: TextOverflow.fade,
                       softWrap: true,
                     ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                    constraints:
+                        const BoxConstraints(minHeight: 20.0, minWidth: 20.0),
+                    tooltip: 'Add to favorites',
+                    icon: Icon(
+                      meal.isFavorite
+                          ? Icons.favorite_rounded
+                          : Icons.favorite_border_rounded,
+                    ),
+                    color: Colors.redAccent,
+                    onPressed: () =>
+                        Provider.of<FilteredMeal>(context, listen: false)
+                            .toggleFavorite(meal),
                   ),
                 ),
               ],
