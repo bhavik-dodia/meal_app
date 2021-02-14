@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -82,6 +84,26 @@ class MealItem extends StatelessWidget {
                     child: Image.network(
                       meal.imageUrl,
                       fit: BoxFit.cover,
+                      loadingBuilder: (context, child, progress) {
+                        if (progress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: progress.cumulativeBytesLoaded /
+                                    progress.expectedTotalBytes ??
+                                null,
+                          ),
+                        );
+                      },
+                      errorBuilder: (context, exception, stackTrace) =>
+                          Container(
+                        padding: const EdgeInsets.all(8.0),
+                        alignment: Alignment.center,
+                        child: Text(
+                          exception.toString(),
+                          style: TextStyle(color: Colors.redAccent),
+                          textAlign: TextAlign.justify,
+                        ),
+                      ),
                     ),
                   ),
                 ),
