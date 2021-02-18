@@ -30,10 +30,12 @@ class _HomePageState extends State<HomePage> {
             color: theme.accentColor,
           ),
         ),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(55.0),
-          child: FiltersChips(),
-        ),
+        bottom: _currentIndex == 0
+            ? PreferredSize(
+                preferredSize: Size.fromHeight(55.0),
+                child: FiltersChips(),
+              )
+            : null,
       ),
       body: IndexedStack(
         index: _currentIndex,

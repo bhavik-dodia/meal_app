@@ -147,7 +147,7 @@ class MealItem extends StatelessWidget {
                           ? Icons.favorite_rounded
                           : Icons.favorite_border_rounded,
                     ),
-                    color: Colors.redAccent,
+                    color: Colors.pinkAccent,
                     onPressed: () =>
                         Provider.of<FilteredMeal>(context, listen: false)
                             .toggleFavorite(meal),
